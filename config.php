@@ -17,7 +17,7 @@
     // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
     //
     //
-    // see file COPYING or at http://www.gnu.org/licenses/gpl.html
+    // see file COPYING or at http://www.gnu.org/licenses/gpl.html 
     // for more information.
     //
     error_reporting(E_ALL | E_NOTICE);
@@ -25,29 +25,43 @@
     //
     // configuration parameters
     //
-    // edit these to reflect your particular situation
-    //
-    $locale = 'en_US.UTF-8';
-    $language = 'nl';
+     $language = isset($_GET['lang']) ? $_GET['lang'] : '';
 
-    // Set local timezone
-    date_default_timezone_set("Europe/Amsterdam");
+      switch($language){
+         case 'fr':
+             $locale = 'fr_FR';
+         break;
+         case 'en':
+             $locale = 'en_UK';
+         break;
+
+         default:
+            // edit these to reflect your particular situation
+            //
+
+            $language = 'fr';
+            $locale = 'fr_FR';
+         break;
+      }
+
+
 
     // list of network interfaces monitored by vnStat
-    $iface_list = array('eth0', 'sixxs');
+    $iface_list = array('enps1s0', 'tun0' , 'tun1');
 
     //
     // optional names for interfaces
     // if there's no name set for an interface then the interface identifier
     // will be displayed instead
-    //
-    $iface_title['eth0'] = 'Internal';
-    $iface_title['sixxs'] = 'SixXS IPv6';
+    //    
+    $iface_title['eno1s0'] = 'Internet';
+    $iface_title['tun0'] = 'VPN 1';
+    $iface_title['tun1'] = 'VPN 2';
 
     //
     // There are two possible sources for vnstat data. If the $vnstat_bin
     // variable is set then vnstat is called directly from the PHP script
-    // to get the interface data.
+    // to get the interface data. 
     //
     // The other option is to periodically dump the vnstat interface data to
     // a file (e.g. by a cronjob). In that case the $vnstat_bin variable
@@ -56,17 +70,13 @@
     //
     // You can generate vnstat dumps with the command:
     //   vnstat --dumpdb -i $iface > /path/to/data_dir/vnstat_dump_$iface
-    //
+    // 
     $vnstat_bin = '/usr/bin/vnstat';
     $data_dir = './dumps';
 
     // graphics format to use: svg or png
     $graph_format='svg';
-
-    // preferred byte notation. null auto chooses. otherwise use one of
-    // 'TB','GB','MB','KB'
-    $byte_notation = null;
-
+    
     // Font to use for PNG graphs
     define('GRAPH_FONT',dirname(__FILE__).'/VeraBd.ttf');
 
@@ -74,9 +84,6 @@
     define('SVG_FONT', 'Verdana');
 
     // Default theme
-    define('DEFAULT_COLORSCHEME', 'light');
-    
-    // SVG Depth scaling factor
-    define('SVG_DEPTH_SCALING', 1);
+    define('DEFAULT_COLORSCHEME', 'blue');
 
 ?>
