@@ -47,14 +47,14 @@
 
 
     // list of network interfaces monitored by vnStat
-    $iface_list = array('enps1s0', 'tun0' , 'tun1');
+    $iface_list = array('eno0', 'tun0' , 'tun1');
 
     //
     // optional names for interfaces
     // if there's no name set for an interface then the interface identifier
     // will be displayed instead
     //    
-    $iface_title['eno1s0'] = 'Internet';
+    $iface_title['eno0'] = 'Internet';
     $iface_title['tun0'] = 'VPN 1';
     $iface_title['tun1'] = 'VPN 2';
 
